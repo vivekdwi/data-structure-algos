@@ -1,4 +1,4 @@
-package com.vivz.producerconsumer;
+package com.vivz.multithreading.producerconsumer;
 
 import java.util.Vector;
 import java.util.logging.Level;
