@@ -1,5 +1,7 @@
 package com.vivz.multithreading.executor;
 
+import com.vivz.multithreading.synchronizationandlocks.ConcurrentUtils;
+
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -25,6 +27,7 @@ public class CallableFunctionalInterface {
     public static void main(String[] args){
         Callable<Integer> task = () -> {
             try{
+                ConcurrentUtils.sleep(2);
                 TimeUnit.SECONDS.sleep(1);
                 return 123;
             }catch (InterruptedException exp){
@@ -41,7 +44,7 @@ public class CallableFunctionalInterface {
             Integer result = lFuture.get(1,TimeUnit.SECONDS);
             System.out.println("Is Future Done ? :: "+lFuture.isDone());
             System.out.println("Result :: "+result);
-            lExecutorService.shutdown();
+            ConcurrentUtils.stop(lExecutorService);
         }catch (InterruptedException | ExecutionException | TimeoutException exp){
             System.err.println(exp.getLocalizedMessage());
         }

@@ -1,5 +1,7 @@
 package com.vivz.multithreading.executor;
 
+import com.vivz.multithreading.synchronizationandlocks.ConcurrentUtils;
+
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -26,9 +28,9 @@ public class ScheduledExecutorsWithFixedDelay {
         ScheduledExecutorService lExecutorService = Executors.newScheduledThreadPool(1);
         Runnable task = () -> {
             try{
-                TimeUnit.SECONDS.sleep(2);
+                ConcurrentUtils.sleep(2);
                 System.out.println("Scheduling :: "+System.nanoTime());
-            }catch (InterruptedException exp){
+            }catch (Exception exp){
                 System.err.println(exp.getLocalizedMessage());
             }
         };

@@ -1,5 +1,7 @@
 package com.vivz.multithreading.executor;
 
+import com.vivz.multithreading.synchronizationandlocks.ConcurrentUtils;
+
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -15,10 +17,10 @@ public class RunnableFunctionalInterfaceWithSleep {
             try{
                 String threadName = Thread.currentThread().getName();
                 System.out.println("Foo :: "+threadName);
-                TimeUnit.SECONDS.sleep(5);
+                ConcurrentUtils.sleep(5);
                 System.out.println("Bar :: "+threadName);
-            }catch (InterruptedException exp){
-                exp.printStackTrace();
+            }catch (Exception exp){
+                System.err.println(exp.getLocalizedMessage());
             }
         };
 

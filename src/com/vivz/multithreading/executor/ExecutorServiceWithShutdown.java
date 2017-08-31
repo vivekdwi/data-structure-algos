@@ -1,5 +1,7 @@
 package com.vivz.multithreading.executor;
 
+import com.vivz.multithreading.synchronizationandlocks.ConcurrentUtils;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -25,10 +27,7 @@ public class ExecutorServiceWithShutdown {
                 String lThreadName = Thread.currentThread().getName();
                 System.out.println("Hello ::: "+lThreadName);
                 System.out.println("Attempt to Shutdown Executor");
-                lExecutorService.shutdown();
-                lExecutorService.awaitTermination(5, TimeUnit.SECONDS);
-            }catch (InterruptedException exp){
-                System.err.println(exp.getLocalizedMessage());
+                ConcurrentUtils.stop(lExecutorService);
             }finally {
                 if(!lExecutorService.isShutdown()){
                     System.err.println("Cancel Not Finished Tasks");

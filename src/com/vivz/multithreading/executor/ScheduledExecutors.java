@@ -1,5 +1,7 @@
 package com.vivz.multithreading.executor;
 
+import com.vivz.multithreading.synchronizationandlocks.ConcurrentUtils;
+
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
@@ -30,11 +32,11 @@ public class ScheduledExecutors {
             ScheduledExecutorService lExecutorService = Executors.newScheduledThreadPool(1);
             Runnable task = () -> System.out.println("Scheduling :: "+System.nanoTime());
             ScheduledFuture<?> lFuture = lExecutorService.schedule(task,3, TimeUnit.SECONDS);
-            TimeUnit.MILLISECONDS.sleep(1337);
+            ConcurrentUtils.sleep(3);
             long remainingDelay = lFuture.getDelay(TimeUnit.MILLISECONDS);
             System.out.printf("Remaining Delays : %sms \n",remainingDelay);
             lExecutorService.shutdown();
-        }catch (InterruptedException exp){
+        }catch (Exception exp){
             System.err.println(exp.getLocalizedMessage());
         }
     }

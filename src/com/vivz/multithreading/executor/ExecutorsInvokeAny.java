@@ -1,5 +1,7 @@
 package com.vivz.multithreading.executor;
 
+import com.vivz.multithreading.synchronizationandlocks.ConcurrentUtils;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -48,7 +50,7 @@ public class ExecutorsInvokeAny {
      */
     protected static Callable<String> callable(String result, long sleepSeconds){
         return () -> {
-            TimeUnit.SECONDS.sleep(sleepSeconds);
+            ConcurrentUtils.sleep((int)sleepSeconds);
             return result;
         };
     }
