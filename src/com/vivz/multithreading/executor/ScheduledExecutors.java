@@ -16,6 +16,12 @@ import java.util.concurrent.TimeUnit;
  * tasks to run either periodically or once after a
  * certain amount of time has elapsed.
  *
+ * Scheduling a task produces a specialized future of
+ * type ScheduledFuture which - in addition to Future -
+ * provides the method getDelay() to retrieve the
+ * remaining delay. After this delay has elapsed the
+ * task will be executed concurrently.
+ *
  * Created by vivekdwivedi on 8/30/2017.
  */
 public class ScheduledExecutors {
