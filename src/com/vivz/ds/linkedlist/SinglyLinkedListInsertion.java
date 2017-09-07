@@ -5,7 +5,7 @@ package com.vivz.ds.linkedlist;
  * of Insertion Logic of Node in Starting, End and Middle
  * of Nodes in Linked List.
  *
- * Created by Sapient on 9/7/2017.
+ * Created by vivekdwivedi on 9/7/2017.
  */
 public class SinglyLinkedListInsertion {
 

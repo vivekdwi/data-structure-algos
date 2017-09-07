@@ -5,7 +5,7 @@ package com.vivz.ds.linkedlist;
  * an Example of Traversing LinkedList starting
  * from Head.
  *
- * Created by Sapient on 9/7/2017.
+ * Created by vivekdwivedi on 9/7/2017.
  */
 public class SinglyLinkedListTraversal {
 
