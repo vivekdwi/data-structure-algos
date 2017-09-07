@@ -12,7 +12,8 @@ public class SinglyLinkedListTraversal {
     Node mHead;
 
     /**
-     *
+     * Linked list Node.  This inner class is
+     * made static so that main() can access it.
      */
     static class Node{
         int lData;
