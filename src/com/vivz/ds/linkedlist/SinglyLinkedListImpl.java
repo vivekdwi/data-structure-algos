@@ -47,17 +47,16 @@ public class SinglyLinkedListImpl{
         Node lThird = new Node(3);
 
         // Link first node with the second node
-        lLinkedList.mHead.lNext = lSecond;
-
         /*  Now next of first Node refers to second.  So they
             both are linked.
 
-         llist.head        second              third
+         lLinkedList.head        second              third
             |                |                  |
             |                |                  |
         +----+------+     +----+------+     +----+------+
         | 1  |  o-------->| 2  | null |     |  3 | null |
         +----+------+     +----+------+     +----+------+ */
+        lLinkedList.mHead.lNext = lSecond;
 
         // Link second node with the third node
          /*  Now next of second Node refers to third.  So all three
