@@ -10,7 +10,6 @@ _`Lets see couple of different scenarios (examples) where we use serialization.`
 to bytes) and sent to server where the details are dematerialized (unmarshaled/rebuilt the bytes)and used to perform operations. This will reduce the network calls as we are serializing the whole object 
 and sending to server and further request for information from client is not needed by the server.
 
-
 2. Stock example: Lets say an user wants the stock updates immediately when he request for it. To achieve this, everytime we have an update, we can serialize it and save it in a file. When user requests 
 the information, deserialize it from file and provide the information. This way we dont need to make the user wait for the information until we hit the database, perform computations and get the result.
 
@@ -25,6 +24,7 @@ f. To activate/passivate enterprise java beans.
 g. To send objects between the servers in a cluster.
 
 _`Performance Issues/Improvement with Serialization`_
+
 The default way of implementing the serialization (by implementing the Serializable interface) has performance glitches. Say you have to write an object 10000 times in a flat file through serialization, 
 this will take much more (alomost double) the time than it takes to write the same object 10000 times to console. To overcome this issue, its always better to write your custom protocol instead of going 
 for default option.
@@ -36,6 +36,19 @@ Using Serialization always have performance issues? Nope... Let me give you a si
 and pointing to different areas in the map should highlight those areas in different color. Since all these are images, when you point to each location, loading an image each time will slow the 
 application heavily. To resolve this issue, serialization can be used. So here since the images wont change, you can serialize the image object and the respective points on the map (x and y co-ordinates) 
 and deserialize it as and when necessary. This improves the performance greatly.
+
+_`Versioning Issue in Serialization`_
+
+Versioning issues
+
+One very important item to look at is the versioning issue. Sometimes you wil get "java.io.InvalidClassException" but when you check the class (it will be Serializable class), you will find nothing wrong 
+with it. Then what is causing this exception to be thrown? Ok. Here it is. You create a Serializable class, instantiate it, and write it out to an object stream. That flattened object sits in the file system
+for some time. Meanwhile, you update the class file by adding a new field. Then try to read the flattened object. InvalidClassException is thrown because all persistent-capable classes are automatically given 
+a unique identifier. If the identifier of the class does not equal the identifier of the flattened object, the exception will be thrown and when you update the class with a new field, a new identifier will be 
+generated.
+
+To fix this issue, manually add the identifier to the class. The identifier that is part of all classes is maintained in a field called serialVersionUID. If you wish to control versioning, you simply have to 
+provide the serialVersionUID field manually and ensure it is always the same, no matter what changes you make to the classfile.
 
 **`Functional Interfaces`**
 
