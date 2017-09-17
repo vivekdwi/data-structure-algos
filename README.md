@@ -48,6 +48,7 @@ generated.
 To fix this issue, manually add the identifier to the class. The identifier that is part of all classes is maintained in a field called serialVersionUID. If you wish to control versioning, you simply have to 
 provide the serialVersionUID field manually and ensure it is always the same, no matter what changes you make to the classfile.
 
+
 **`Functional Interfaces`**
 
 How does lambda expressions fit into Java's type system? Each lambda corresponds to a given type, specified by an interface. A so called functional interface must contain exactly one abstract method declaration. Each lambda expression of that type will be matched to this abstract method. Since default methods are not abstract you're free to add default methods to your functional interface.
