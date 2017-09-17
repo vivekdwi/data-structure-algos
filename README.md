@@ -39,8 +39,6 @@ and deserialize it as and when necessary. This improves the performance greatly.
 
 _`Versioning Issue in Serialization`_
 
-Versioning issues
-
 One very important item to look at is the versioning issue. Sometimes you wil get "java.io.InvalidClassException" but when you check the class (it will be Serializable class), you will find nothing wrong 
 with it. Then what is causing this exception to be thrown? Ok. Here it is. You create a Serializable class, instantiate it, and write it out to an object stream. That flattened object sits in the file system
 for some time. Meanwhile, you update the class file by adding a new field. Then try to read the flattened object. InvalidClassException is thrown because all persistent-capable classes are automatically given 
