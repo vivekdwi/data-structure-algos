@@ -13,14 +13,20 @@ and sending to server and further request for information from client is not nee
 2. Stock example: Lets say an user wants the stock updates immediately when he request for it. To achieve this, everytime we have an update, we can serialize it and save it in a file. When user requests 
 the information, deserialize it from file and provide the information. This way we dont need to make the user wait for the information until we hit the database, perform computations and get the result.
 
-`Here are some uses of serialization`
+_`Here are some uses of serialization`_
 
 a. To persist data for future use.
+
 b. To send data to a remote computer using such client/server Java technologies as RMI or socket programming.
+
 c. To "flatten" an object into array of bytes in memory.
+
 d. To exchange data between applets and servlets.
+
 e. To store user session in Web applications.
+
 f. To activate/passivate enterprise java beans.
+
 g. To send objects between the servers in a cluster.
 
 _`Performance Issues/Improvement with Serialization`_
@@ -47,6 +53,41 @@ generated.
 
 To fix this issue, manually add the identifier to the class. The identifier that is part of all classes is maintained in a field called serialVersionUID. If you wish to control versioning, you simply have to 
 provide the serialVersionUID field manually and ensure it is always the same, no matter what changes you make to the classfile.
+
+**`Externalization in Java`**
+
+Externalization is nothing but serialization but by implementing Externalizable interface to persist and restore the object. To externalize your object, you need to implement Externalizable interface that extends 
+Serializable interface. Here only the identity of the class is written in the serialization stream and it is the responsibility of the class to save and restore the contents of its instances which means you will 
+have complete control of what to serialize and what not to serialize. But with serialization the identity of all the classes, its superclasses, instance variables and then the contents for these items is written 
+to the serialization stream. But to externalize an object, you need a default public constructor.
+
+Unlike Serializable interface, Externalizable interface is not a marker interface and it provides two methods - writeExternal and readExternal. These methods are implemented by the class to give the class a complete
+control over the format and contents of the stream for an object and its supertypes. These methods must explicitly coordinate with the supertype to save its state. These methods supersede customized implementations
+of writeObject and readObject methods.
+
+How serialization happens? JVM first checks for the Externalizable interface and if object supports Externalizable interface, then serializes the object using writeExternal method. If the object does not support 
+Externalizable but implement Serializable, then the object is saved using ObjectOutputStream. Now when an Externalizable object is reconstructed, an instance is created first using the public no-arg constructor, 
+then the readExternal method is called. Again if the object does not support Externalizable, then Serializable objects are restored by reading them from an ObjectInputStream.
+
+_`Externalization Limitations`_
+
+Externalization efficiency comes at a price. The default serialization mechanism adapts to application changes due to the fact that metadata is automatically extracted from the class definitions (observe the 
+format above and you will see that when the object is serialized by implementing Serializable interface, the class metadata(definitions) are written to the persistent store while when you serialize by implementing 
+Externalizable interface, the class metadata is not written to the persistent store). Externalization on the other hand isn't very flexible and requires you to rewrite your marshalling and demarshalling code whenever 
+you change your class definitions.
+
+As you know a default public no-arg constructor will be called when serializing the objects that implements Externalizable interface. Hence, Externalizable interface can't be implemented by Inner Classes in Java as 
+all the constructors of an inner class in Java will always accept the instance of the enclosing class as a prepended parameter and therefore you can't have a no-arg constructor for an inner class. Inner classes can 
+achieve object serialization by only implementing Serializable interface.
+
+If you are subclassing your externalizable class, you have to invoke your superclass’s implementation. So this causes overhead while you subclass your externalizable class. Observe the examples above where the 
+superclass writeExternal method is explicitly called in the subclass writeExternal method.
+
+Methods in externalizable interface are public. So any malicious program can invoke which results into loosing the prior serialized state.
+
+Once your class is tagged with either Serializable or Externalizable, you can't change any evolved version of your class to the other format. You alone are responsible for maintaining compatibility across versions. 
+That means that if you want the flexibility to add fields in the future, you'd better have your own mechanism so that you can skip over additional information possibly added by those future versions.
+
 
 
 **`Functional Interfaces`**
