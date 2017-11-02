@@ -40,7 +40,6 @@ public class LinkedListMiddleElementTest {
         if(length%2 ==1){
             lMiddle = lMiddle.getNext();
         }
-
         System.out.println("Length of Linked List :: "+length);
         System.out.println("Middle Element Of Linked List :: "+lMiddle);
     }
