@@ -4,6 +4,13 @@ package com.vivz.programs;
  * {@link LinkedListMiddleElementTest} Class is an Example of
  * Finding Middle Element of Linked List
  *
+ * Java program to find middle element of linked list in one pass.
+ * In order to find middle element of linked list we need to find length first
+ * but since we can only traverse linked list one time, we will use two pointers
+ * one which we will increment on each iteration while other which will be
+ * incremented every second iteration. so when first pointer will point to the
+ * end of linked list, second will be pointing to the middle element of linked list
+ *
  * Created by vivekdwivedi on 9/8/2017.
  */
 public class LinkedListMiddleElementTest {
