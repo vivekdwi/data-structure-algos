@@ -39,6 +39,33 @@ public class ArraySumUsingSet {
     }
 
     /**
+     * This Method Prints the Pairs From Array whose sum
+     * equals to given sum using Pointers.
+     * @param array
+     * @param sum
+     */
+    public static void printPairsUsingTwoPointers(int[] array, int sum){
+        System.out.println("*******************************************");
+        if(array.length < 2)
+            return;
+        Arrays.sort(array);
+        int left = 0;
+        int right = array.length-1;
+        while (left < right){
+            int sums = array[left] + array[right];
+            if(sums == sum){
+                System.out.printf("(%d, %d)%n",array[left],array[right]);
+                left +=1;
+                right -= 1;
+            }else if (sums < sum){
+                left += 1;
+            }else if (sums > sum){
+                right -= 1;
+            }
+        }
+        System.out.println("*********************************************");
+    }
+    /**
      * This method prints the Array Details.
      *
      * @param array
@@ -48,6 +75,7 @@ public class ArraySumUsingSet {
         System.out.println("Given Array :: "+ Arrays.toString(array));
         System.out.println("Given Sum :: "+sum);
         printPairUsingSet(array,sum);
+        printPairsUsingTwoPointers(array,sum);
     }
 
     /**
